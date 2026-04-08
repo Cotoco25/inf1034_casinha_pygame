@@ -13,8 +13,8 @@ nuvem_y=100
 velocidade_nuvem=3
 relogio=time.Clock()
 
-batman_img = image.load("batman.png")
-batman_img = transform.scale(batman_img, (180,200))
+matue_img = image.load("matue.png")
+matue_img = transform.scale(matue_img, (180,200))
 
 batman_font = font.Font("fontecarai.otf", 40)
 
@@ -56,10 +56,10 @@ while True:
 
 
     #desenhar imagem
-    window.blit(batman_img, (600,450))
+    window.blit(matue_img, (600,450))
 
     #desenhar texto
-    batman_text = batman_font.render("Sou batman", True, (0,0,0))
+    batman_text = batman_font.render("As vezes eu fumo um baseado, tlgd", True, (0,0,0))
     window.blit(batman_text, (570,400))
 
     display.update()
