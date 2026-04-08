@@ -38,6 +38,9 @@ while True:
     draw.rect(window, (121, 77, 27), (450, 430,75,170))
     draw.circle(window, (0,0,0), (470,520), 7)
     draw.line(window, (255, 0 ,255), (80,130), (20,130), 10)
+    draw.line(window, (255, 0 ,255), (200,130), (260,130), 10)
+    draw.line(window, (255, 0 ,255), (140,190), (140,250), 10)
+    draw.line(window, (255, 0 ,255), (140,70), (140,10), 10)
 
 
     #nuvem
