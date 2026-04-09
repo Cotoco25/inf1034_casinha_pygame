@@ -37,10 +37,12 @@ while True:
     draw.rect(window, (13, 22, 100), (370, 460,50,70))
     draw.rect(window, (121, 77, 27), (450, 430,75,170))
     draw.circle(window, (0,0,0), (470,520), 7)
-    draw.line(window, (255, 0 ,255), (80,130), (20,130), 10)
-    draw.line(window, (255, 0 ,255), (200,130), (260,130), 10)
-    draw.line(window, (255, 0 ,255), (140,190), (140,250), 10)
-    draw.line(window, (255, 0 ,255), (140,70), (140,10), 10)
+    draw.line(window, (255, 242, 81), (80,130), (20,130), 10)
+    draw.line(window, (255, 242, 81), (200,130), (260,130), 10)
+    draw.line(window, (255, 242, 81), (140,190), (140,250), 10)
+    draw.line(window, (255, 242, 81), (140,70), (140,10), 10)
+    draw.rect(window, (101, 67, 33), (1000, 240, 80, 400))
+    draw.circle(window, (0, 128, 0), (1040,300), 100)
 
 
     #nuvem
@@ -59,7 +61,7 @@ while True:
     window.blit(matue_img, (600,450))
 
     #desenhar texto
-    batman_text = batman_font.render("As vezes eu fumo um baseado, tlgd", True, (0,0,0))
+    batman_text = batman_font.render("As vezes eu fumo um baseado", True, (0,0,0))
     window.blit(batman_text, (570,400))
 
     display.update()
