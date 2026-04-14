@@ -6,12 +6,18 @@ init()
 window = display.set_mode((1280,720))
 
 #fazer o fundo - RGB
-window.fill((151, 209, 250))
 
+
+
+raio_x = 140
+timer = 0
 nuvem_x=800
 nuvem_y=100
 velocidade_nuvem=3
-relogio=time.Clock()
+running = True
+velocidade_nuvem2=-3
+clock=time.Clock()
+
 
 matue_img = image.load("matue.png")
 matue_img = transform.scale(matue_img, (180,200))
@@ -21,40 +27,126 @@ batman_font = font.Font("fontecarai.otf", 40)
 mixer.music.load("matue.mp3")
 mixer.music.play(-1)
 
+feijao = mixer.Sound("feijao-com-farinha.mp3")
+baby1 = mixer.Sound("baby1.mp3")
+baby2 = mixer.Sound("baby2.mp3")
+baby3 = mixer.Sound("baby3.mp3")
+
 #programa para fazer o programa fechar com o X do windows
 #se for desenhar alguma coisa, desenhar a partir do sys.exit()
-while True:
+modo_fundo = False
+background_color = (255, 188, 99)
+
+while running:
+    clock.tick(60)
+    key_pressed = key.get_pressed()
+
     for ev in event.get():
         if ev.type == QUIT:
             quit()
+            running = False
             sys.exit()
-    window.fill((151, 209, 250))
-#desenhar a partir daqui
+        
+        if ev.type == KEYDOWN:
+            key_pressed = ev.key
+            if key_pressed == K_SPACE:
+                modo_fundo = not modo_fundo
+    
+
+        if ev.type == KEYDOWN:
+            if background_color == (255, 188, 99):
+                if key_pressed == K_w:
+                    baby1.play()
+
+        if ev.type == KEYDOWN:
+            if background_color == (151, 209, 250):
+                if key_pressed == K_w:
+                    baby2.play()
+
+        if ev.type == KEYDOWN:
+            if background_color == (13, 29, 92):
+                if key_pressed == K_w:
+                    baby3.play()
+
+        if ev.type == KEYDOWN:
+            if background_color == (245,178,64):
+                if key_pressed == K_w:
+                    feijao.play()
+
+
+        if modo_fundo:
+            background_color = (245,178,64)
+        else: 
+            if raio_x >= 500 and raio_x < 900:
+                background_color = (151, 209, 250)
+            elif raio_x >= 900:
+                background_color = (13, 29, 92) 
+            else:
+                background_color = (255, 188, 99)
+    
+    
+
+
+    ##update
+    dt = clock.get_time()/1000
+    keys = key.get_pressed()
+
+
+
+
+
+
+    #teclas
+    if raio_x <1350:
+        if keys[K_d]:
+            raio_x = raio_x + 100 *dt
+    if raio_x > -50:
+        if keys[K_a]:
+            raio_x = raio_x - 100 *dt
+
+    if raio_x <1350:
+        if ev.type == MOUSEBUTTONDOWN:
+            if ev.button == 1:
+                raio_x = raio_x + 100 *dt
+    
+    if raio_x > -50:
+        if ev.type == MOUSEBUTTONDOWN:
+            if ev.button == 3:
+                raio_x = raio_x - 100 *dt
+
+
+    #desenhar a partir daqui
+
+    window.fill(background_color)
+
+
+    draw.line(window, (255, 242, 81), (raio_x - 60,130), (raio_x - 120,130), 10)
+    draw.line(window, (255, 242, 81), (raio_x +60 ,130), (raio_x + 120,130), 10)
+    draw.line(window, (255, 242, 81), (raio_x,190), (raio_x,250), 10)
+    draw.line(window, (255, 242, 81), (raio_x,70), (raio_x,10), 10)
+    draw.rect(window, (101, 67, 33), (1000, 240, 80, 400))
+    draw.circle(window, (0, 128, 0), (1040,300), 100)
     draw.rect(window, (72, 157, 37), (0,600,1280,220))
     draw.rect(window, (100, 100, 100), (350, 360,200,240))
-    draw.circle(window, (255, 242, 81), (140,130), 60)
+    draw.circle(window, (255, 242, 81), (raio_x,130), 60)
     draw.polygon(window, (242, 136, 59), ((350,360),(550,360),(450,200)))
     draw.rect(window, (13, 22, 100), (370, 460,50,70))
     draw.rect(window, (121, 77, 27), (450, 430,75,170))
     draw.circle(window, (0,0,0), (470,520), 7)
-    draw.line(window, (255, 242, 81), (80,130), (20,130), 10)
-    draw.line(window, (255, 242, 81), (200,130), (260,130), 10)
-    draw.line(window, (255, 242, 81), (140,190), (140,250), 10)
-    draw.line(window, (255, 242, 81), (140,70), (140,10), 10)
-    draw.rect(window, (101, 67, 33), (1000, 240, 80, 400))
-    draw.circle(window, (0, 128, 0), (1040,300), 100)
-
 
     #nuvem
     nuvem_x += velocidade_nuvem
+    
+    if nuvem_x <= -380 or nuvem_x >= 1350:
+        velocidade_nuvem = -velocidade_nuvem
 
-    if nuvem_x > 1300:
-        nuvem_x = -150
+    #if nuvem_x > 1350:
+    #    nuvem_x = -350
 
-    draw.circle(window, (255,255,255), (nuvem_x,100),(70))
-    draw.circle(window, (255,255,255), (nuvem_x+100,100),(70))
-    draw.circle(window, (255,255,255), (nuvem_x+200,100),(70))
-    draw.circle(window, (255,255,255), (nuvem_x+300,100),(70))
+    draw.circle(window, (255,255,255), (nuvem_x,nuvem_y),(70))
+    draw.circle(window, (255,255,255), (nuvem_x+100,nuvem_y),(70))
+    draw.circle(window, (255,255,255), (nuvem_x+200,nuvem_y),(70))
+    draw.circle(window, (255,255,255), (nuvem_x+300,nuvem_y),(70))
 
 
     #desenhar imagem
@@ -65,4 +157,3 @@ while True:
     window.blit(batman_text, (570,400))
 
     display.update()
-    relogio.tick(60)
