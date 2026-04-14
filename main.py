@@ -19,12 +19,14 @@ velocidade_nuvem2=-3
 clock=time.Clock()
 
 
+
 matue_img = image.load("matue.png")
 matue_img = transform.scale(matue_img, (180,200))
 
 batman_font = font.Font("fontecarai.otf", 40)
 
 mixer.music.load("matue.mp3")
+mixer.music.set_volume(0.3)
 mixer.music.play(-1)
 
 feijao = mixer.Sound("feijao-com-farinha.mp3")
@@ -35,7 +37,18 @@ baby3 = mixer.Sound("baby3.mp3")
 #programa para fazer o programa fechar com o X do windows
 #se for desenhar alguma coisa, desenhar a partir do sys.exit()
 modo_fundo = False
-background_color = (255, 188, 99)
+
+uuu=255
+iii=188
+ooo=99
+background_color = (uuu, iii, ooo)
+
+
+
+aaa = (uuu-(600//5.75))
+bbb = (iii+(600//25))
+ccc = (ooo+(600//3.95))
+
 
 while running:
     clock.tick(60)
@@ -51,40 +64,41 @@ while running:
             key_pressed = ev.key
             if key_pressed == K_SPACE:
                 modo_fundo = not modo_fundo
-    
 
-        if ev.type == KEYDOWN:
-            if background_color == (255, 188, 99):
-                if key_pressed == K_w:
+
+        if ev.type == MOUSEBUTTONDOWN:
+            if raio_x >0 and raio_x < 430 and modo_fundo == False:
+                if ev.button == 2:
                     baby1.play()
 
-        if ev.type == KEYDOWN:
-            if background_color == (151, 209, 250):
-                if key_pressed == K_w:
+        if ev.type == MOUSEBUTTONDOWN:
+            if raio_x >430 and raio_x < 860 and modo_fundo == False:
+                if ev.button == 2:
                     baby2.play()
 
-        if ev.type == KEYDOWN:
-            if background_color == (13, 29, 92):
-                if key_pressed == K_w:
+        if ev.type == MOUSEBUTTONDOWN:
+            if raio_x >860 and raio_x < 1350 and modo_fundo == False:
+            #if background_color == (13, 29, 92):
+                if ev.button == 2:
                     baby3.play()
 
-        if ev.type == KEYDOWN:
-            if background_color == (245,178,64):
-                if key_pressed == K_w:
+        if ev.type == MOUSEBUTTONDOWN:
+            if modo_fundo == True:
+                if ev.button == 2:
                     feijao.play()
 
 
         if modo_fundo:
             background_color = (245,178,64)
-        else: 
-            if raio_x >= 500 and raio_x < 900:
-                background_color = (151, 209, 250)
-            elif raio_x >= 900:
-                background_color = (13, 29, 92) 
-            else:
-                background_color = (255, 188, 99)
+        else:
+                if raio_x < 600:
+                    background_color = (uuu-(raio_x)//5.75, iii+(raio_x//25), ooo+(raio_x//3.95))
+                else:
+                    if raio_x >= 600:
+                        background_color = (aaa-((raio_x-600)//5), bbb-((raio_x-600)//4.3), ccc-((raio_x-600)//4.5))
+
     
-    
+    print(background_color)
 
 
     ##update
@@ -100,7 +114,7 @@ while running:
     if raio_x <1350:
         if keys[K_d]:
             raio_x = raio_x + 100 *dt
-    if raio_x > -50:
+    if raio_x > 10:
         if keys[K_a]:
             raio_x = raio_x - 100 *dt
 
