@@ -128,17 +128,17 @@ while running:
 
 
     #if modo_mouse == False:
-    if raio_x<1350:
+    if raio_x<1150:
         if keys[K_d]:
                 raio_x = raio_x + 100 *dt
-    if raio_x > 10:
+    if raio_x > 120:
         if keys[K_a]:
                 raio_x = raio_x - 100 *dt
-    if raio_x <1350:
+    if raio_x <1150:
         if ev.type == MOUSEBUTTONDOWN:
             if ev.button == 1:
                 raio_x = raio_x + 100 *dt
-    if raio_x > -50:
+    if raio_x > 120:
         if ev.type == MOUSEBUTTONDOWN:
             if ev.button == 3:
                 raio_x = raio_x - 100 *dt
@@ -176,7 +176,7 @@ while running:
     #nuvem
     nuvem_x += velocidade_nuvem
     
-    if nuvem_x <= -380 or nuvem_x >= 1350:
+    if nuvem_x <= 60 or nuvem_x >= 920:
         velocidade_nuvem = -velocidade_nuvem
 
     #if nuvem_x > 1350:
